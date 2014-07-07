@@ -2,6 +2,8 @@
 
 UI Component like ActionBar-PullToRefresh of Android for iOS.
 
+![How it looks](https://github.com/jaboston/DBZPullToRefresh/blob/master/screenshot.gif "dubizzle styled pull to refresh")
+
 ## Requirements
 
 * iOS6.0 or later
