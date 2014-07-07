@@ -5,12 +5,13 @@
 //  Created by Kenji Abe on 2014/04/06.
 //  Copyright (c) 2014年 Kenji Abe. All rights reserved.
 //
+//  Modified and forked by Joseph Boston 2014. (c) dubizzle.com .
 
 #import "ViewController.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) NSArray *data;
-@property (nonatomic, strong) STZPullToRefresh *pullToRefresh;
+@property (nonatomic, strong) DBZPullToRefresh *pullToRefresh;
 @end
 
 @implementation ViewController
@@ -21,10 +22,10 @@
 
     /// Setup pull to refresh
     CGFloat refreshBarY = self.navigationController.navigationBar.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
-    STZPullToRefreshView *refreshView = [[STZPullToRefreshView alloc] initWithFrame:CGRectMake(0, refreshBarY, self.view.frame.size.width, 3)];
+    DBZPullToRefreshView *refreshView = [[DBZPullToRefreshView alloc] initWithFrame:CGRectMake(0, refreshBarY, self.view.frame.size.width, 3)];
     [self.view addSubview:refreshView];
 
-    self.pullToRefresh = [[STZPullToRefresh alloc] initWithTableView:self.tableView
+    self.pullToRefresh = [[DBZPullToRefresh alloc] initWithTableView:self.tableView
                                                          refreshView:refreshView
                                                    tableViewDelegate:self];
     self.tableView.delegate = self.pullToRefresh;
@@ -64,7 +65,7 @@
     NSLog(@"didSelectRowAtIndexPath: %@", self.data[indexPath.row]);
 }
 
-#pragma mark - STZPullToRefreshDelegate
+#pragma mark - DBZPullToRefreshDelegate
 - (void)pullToRefreshDidStart
 {
     dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

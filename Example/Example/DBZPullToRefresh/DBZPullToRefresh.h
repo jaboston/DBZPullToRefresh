@@ -1,17 +1,17 @@
 //
-//  STZPullToRefresh.h
+//  DBZPullToRefresh.h
 //
 //  Created by Kenji Abe on 2014/04/05.
 //  Copyright (c) 2014年 Kenji Abe. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "STZPullToRefreshView.h"
+#import "DBZPullToRefreshView.h"
 
 /**
- `STZPullToRefreshDelegate` protocol defines the methods a delegate of a `STZPullToRefresh`.
+ `DBZPullToRefreshDelegate` protocol defines the methods a delegate of a `DBZPullToRefresh`.
  */
-@protocol STZPullToRefreshDelegate <NSObject>
+@protocol DBZPullToRefreshDelegate <NSObject>
 
 /**
  Sent to the delegate at the start of refresh animation.
@@ -20,11 +20,11 @@
 @end
 
 /**
- `STZPullToRefresh` is management view and delegate.
+ `DBZPullToRefresh` is management view and delegate.
  
  UI Component like ActionBar-PullToRefresh of Android for iOS.
  */
-@interface STZPullToRefresh : NSObject <UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface DBZPullToRefresh : NSObject <UITableViewDelegate, UIGestureRecognizerDelegate>
 
 ///---------------------
 /// @name Setting Properties
@@ -33,7 +33,7 @@
 /**
  The receiver’s delegate
  */
-@property (nonatomic, weak) id<STZPullToRefreshDelegate> delegate;
+@property (nonatomic, weak) id<DBZPullToRefreshDelegate> delegate;
 
 ///---------------------
 /// @name Initialization
@@ -45,7 +45,7 @@
  @param tableView UITableView that should be subject to the pull to refresh.
  @param refreshView View for refresh animation.
  */
-- (id)initWithTableView:(UITableView *)tableView refreshView:(STZPullToRefreshView *)refreshView;
+- (id)initWithTableView:(UITableView *)tableView refreshView:(DBZPullToRefreshView *)refreshView;
 
 /**
  Create and return instance for processing UITableViewDelegate.
@@ -54,7 +54,7 @@
  @param refreshView View for refresh animation.
  @param tableViewDelegate Receiver for processing UITableViewDelegate.
  */
-- (id)initWithTableView:(UITableView *)tableView refreshView:(STZPullToRefreshView *)refreshView tableViewDelegate:(id<UITableViewDelegate>)tableViewDelegate;
+- (id)initWithTableView:(UITableView *)tableView refreshView:(DBZPullToRefreshView *)refreshView tableViewDelegate:(id<UITableViewDelegate>)tableViewDelegate;
 
 ///---------------------
 /// @name Refresh Animation

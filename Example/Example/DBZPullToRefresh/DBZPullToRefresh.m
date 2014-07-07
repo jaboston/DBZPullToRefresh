@@ -1,18 +1,19 @@
 //
-//  STZPullToRefresh.m
+//  DBZPullToRefresh.m
 //
 //  Created by Kenji Abe on 2014/04/05.
 //  Copyright (c) 2014年 Kenji Abe. All rights reserved.
 //
+//
+//  Modified and forked by Joseph Boston 2014. (c) dubizzle.com .
+#import "DBZPullToRefresh.h"
 
-#import "STZPullToRefresh.h"
-
-@interface STZPullToRefresh ()
+@interface DBZPullToRefresh ()
 @property (nonatomic, weak) UITableView *tableView;
 
 @property (nonatomic, weak) id<UITableViewDelegate> tableViewProxyDelegate;
 
-@property (nonatomic, strong) STZPullToRefreshView *refreshView;
+@property (nonatomic, strong) DBZPullToRefreshView *refreshView;
 
 @property (nonatomic, assign) BOOL isScrollTopPosition;
 @property (nonatomic, assign) BOOL isScrollDragging;
@@ -20,16 +21,16 @@
 
 @end
 
-@implementation STZPullToRefresh
+@implementation DBZPullToRefresh
 
 static CGFloat const kPregoressWeight = 1.2;
 
-- (id)initWithTableView:(UITableView *)tableView refreshView:(STZPullToRefreshView *)refreshView
+- (id)initWithTableView:(UITableView *)tableView refreshView:(DBZPullToRefreshView *)refreshView
 {
     return [self initWithTableView:tableView refreshView:refreshView tableViewDelegate:nil];
 }
 
-- (id)initWithTableView:(UITableView *)tableView refreshView:(STZPullToRefreshView *)refreshView tableViewDelegate:(id<UITableViewDelegate>)tableViewDelegate
+- (id)initWithTableView:(UITableView *)tableView refreshView:(DBZPullToRefreshView *)refreshView tableViewDelegate:(id<UITableViewDelegate>)tableViewDelegate
 {
     self = [super init];
     if (self) {
