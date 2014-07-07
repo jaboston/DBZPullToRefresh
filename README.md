@@ -3,6 +3,7 @@
 UI Component like ActionBar-PullToRefresh of Android for iOS.
 
 ![Screenshot](https://github.com/jaboston/DBZPullToRefresh/blob/master/screenshot.gif)
+![Screenshot](https://raw.github.com/STAR-ZERO/STZPullToRefresh/master/screenshot.gif)
 
 
 ## Requirements
