@@ -1,4 +1,4 @@
-# STZPullToRefresh
+# DBZPullToRefresh
 
 UI Component like ActionBar-PullToRefresh of Android for iOS.
 
