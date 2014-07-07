@@ -2,7 +2,8 @@
 
 UI Component like ActionBar-PullToRefresh of Android for iOS.
 
-![Screenshot](https://raw.github.com/STAR-ZERO/STZPullToRefresh/master/screenshot.gif)(https://github.com/jaboston/DBZPullToRefresh/blob/master/screenshot.gif "dubizzle styled pull to refresh")
+![Screenshot](https://github.com/jaboston/DBZPullToRefresh/blob/master/screenshot.gif)
+
 
 ## Requirements
 
