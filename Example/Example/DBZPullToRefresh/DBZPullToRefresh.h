@@ -24,7 +24,7 @@
  
  UI Component like ActionBar-PullToRefresh of Android for iOS.
  */
-@interface DBZPullToRefresh : NSObject <UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface DBZPullToRefresh : NSObject <UITableViewDelegate, UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
 ///---------------------
 /// @name Setting Properties
@@ -55,6 +55,17 @@
  @param tableViewDelegate Receiver for processing UITableViewDelegate.
  */
 - (id)initWithTableView:(UITableView *)tableView refreshView:(DBZPullToRefreshView *)refreshView tableViewDelegate:(id<UITableViewDelegate>)tableViewDelegate;
+
+/**
+ Create and return instance for processing UICollectionViewDelegate. 
+ 
+ @param collectionView UICollectionView that should be subject to the pull to refresh.
+ @param refreshView View for refresh animation.
+ @param collectionViewDelegate Receiver for processing UICollectionViewDelegate. 
+**/
+
+- (id)initWithCollectionView:(UICollectionView *)collectionView refreshView:(DBZPullToRefreshView *)refreshView collectionViewDelegate:(id<UICollectionViewDelegate>)collectionViewDelegate;
+
 
 ///---------------------
 /// @name Refresh Animation

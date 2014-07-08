@@ -10,8 +10,10 @@
 
 @interface DBZPullToRefresh ()
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 
 @property (nonatomic, weak) id<UITableViewDelegate> tableViewProxyDelegate;
+@property (nonatomic, weak) id<UICollectionViewDelegate> collectionViewProxyDelegate;
 
 @property (nonatomic, strong) DBZPullToRefreshView *refreshView;
 
@@ -49,6 +51,28 @@ static CGFloat const kPregoressWeight = 1.2;
         self.refreshView = refreshView;
     }
 
+    return self;
+}
+
+- (id)initWithCollectionView:(UICollectionView *)collectionView refreshView:(DBZPullToRefreshView *)refreshView collectionViewDelegate:(id<UICollectionViewDelegate>)collectionViewDelegate
+{
+    self = [super init];
+    if (self) {
+        self.collectionViewProxyDelegate = collectionViewDelegate;
+        
+        self.collectionView = collectionView;
+        self.collectionView.bounces = NO;
+        
+        self.isScrollTopPosition = YES;
+        self.isScrollDragging = NO;
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+        pan.delegate = self;
+        [self.collectionView addGestureRecognizer:pan];
+        
+        self.refreshView = refreshView;
+    }
+    
     return self;
 }
 

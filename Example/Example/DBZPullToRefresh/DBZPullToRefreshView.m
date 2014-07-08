@@ -27,7 +27,7 @@
         [self addSubview:self.refreshBarView];
         // plus one to take into account the background colour
         //grey
-        self.progressColor = [UIColor colorWithRed:59.0f / 255.f green:66.0f / 255.f blue:69.0f / 255.f alpha:1.0];
+        self.progressColor = [UIColor colorWithRed:143.0f / 255.f green:0.0f / 255.f blue:6.0f / 255.f alpha:1.0];
         //dark red
         //self.progressColor = [UIColor colorWithRed:143.0f / 255.f green:0.0f / 255.f blue:6.0f / 255.f alpha:1.0];
         _maxIndicators = 5;
@@ -37,15 +37,13 @@
         [mColours addObject:[UIColor colorWithRed:241.f / 255.f green:186.0f / 255.f blue:69.0f / 255.f alpha:1.0]];
         //default red
         [mColours addObject:[UIColor colorWithRed:184.0f/255.0 green:0.0f/255.0 blue:7.0f/255.0 alpha:1.0f]];
+        _colours = mColours;
         //default light blue properties for sale
         [mColours addObject:[UIColor colorWithRed:41.f / 255.f green:164.0f / 255.f blue:215.0f / 255.f alpha:1.0]];
-        //obergine for motors
-        [mColours addObject:[UIColor colorWithRed:124.f / 255.f green:96.0f / 255.f blue:133.0f / 255.f alpha:1.0]];
         //light green for classifieds
         [mColours addObject:[UIColor colorWithRed:104.f / 255.f green:189.0f / 255.f blue:69.0f / 255.f alpha:1.0]];
-        
-        _colours = mColours;
-
+        //obergine for motors
+        [mColours addObject:[UIColor colorWithRed:124.f / 255.f green:96.0f / 255.f blue:133.0f / 255.f alpha:1.0]];
     }
     return self;
 }
@@ -58,6 +56,14 @@
     frame.size.width = progress;
     frame.origin.x = x;
     self.refreshBarView.frame = frame;
+    NSLog(@"progress update: %f", progress);
+    
+    self.refreshBarView.alpha = progress/100;
+    
+//    if(progress != 0.0f && progress < 0.1f){
+//        self.refreshBarView.alpha = 0.0f;
+//        
+//    }
 }
 
 - (BOOL)isProgressFull
@@ -107,8 +113,11 @@
 - (void)finishRefresh
 {
     self.isRefreshing = NO;
-
-    self.backgroundColor = [UIColor clearColor];
+    
+    [UIView animateWithDuration:0.3f animations:^ {
+            self.backgroundColor = [UIColor clearColor];
+    }];
+    
     [self.refreshIndicators enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [(UIView *)obj removeFromSuperview];
     }];
