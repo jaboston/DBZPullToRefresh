@@ -14,7 +14,6 @@
 
 @property (nonatomic, weak) id<UITableViewDelegate> tableViewProxyDelegate;
 @property (nonatomic, weak) id<UICollectionViewDelegate> collectionViewProxyDelegate;
-@property (nonatomic, weak) id<UIScrollViewDelegate> scrollViewProxyDelegate;
 
 @property (nonatomic, strong) DBZPullToRefreshView *refreshView;
 
@@ -196,7 +195,33 @@ static CGFloat const kPregoressWeight = 1.2;
     [self.refreshView setRefreshBarProgress:0];
 
 }
-#pragma mark - UICollectionView Delegate methods. 
+
+
+#pragma mark - UITableView Delegate methods. 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([self.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]){
+        [self.tableViewProxyDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if([self.delegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)]){
+       return [self.tableViewProxyDelegate tableView:tableView viewForHeaderInSection:section];
+        
+    }
+    return [tableView headerViewForSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if([self.delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]){
+        return [self.tableViewProxyDelegate tableView:tableView heightForHeaderInSection:section];
+    }
+    return tableView.sectionHeaderHeight;
+}
+
+
+#pragma mark - UICollectionView Delegate methods.
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     

@@ -28,7 +28,6 @@
         // plus one to take into account the background colour
         //grey
         self.progressColor = [UIColor colorWithRed:59.0f / 255.f green:66.0f / 255.f blue:69.0f / 255.f alpha:1.0];
-        //self.progressColor = [UIColor colorWithRed:255.0f / 255.f green:255.0f / 255.f blue:255.0f / 255.f alpha:1.0];
         //dark red
         //self.progressColor = [UIColor colorWithRed:143.0f / 255.f green:0.0f / 255.f blue:6.0f / 255.f alpha:1.0];
         _maxIndicators = 5;
@@ -57,7 +56,6 @@
     frame.size.width = progress;
     frame.origin.x = x;
     self.refreshBarView.frame = frame;
-    NSLog(@"progress update: %f", progress);
     
     self.refreshBarView.alpha = progress/100;
     
@@ -80,8 +78,6 @@
     [self setRefreshBarProgress:0];
 
     self.refreshIndicators = [[NSMutableArray alloc] init];
-
-    //self.progressColor = [_colours objectAtIndex:_colourPos];
     
     for (NSInteger i = 0; i < _maxIndicators; i++) {
         int frameWidth = self.frame.size.width;
@@ -90,7 +86,7 @@
 
         float delay = ((float)1/_maxIndicators) * i;
 
-        [UIView animateWithDuration:1.2 delay:delay options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionRepeat animations:^{
+        [UIView animateWithDuration:1.0 delay:delay options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionRepeat animations:^{
             CGRect frame = indicator.frame;
             frame.origin.x = self.frame.size.width;
             indicator.frame = frame;
