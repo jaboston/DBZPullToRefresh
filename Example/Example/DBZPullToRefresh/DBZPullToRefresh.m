@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) id<UITableViewDelegate> tableViewProxyDelegate;
 @property (nonatomic, weak) id<UICollectionViewDelegate> collectionViewProxyDelegate;
+@property (nonatomic, weak) id<UIScrollViewDelegate> scrollViewProxyDelegate;
 
 @property (nonatomic, strong) DBZPullToRefreshView *refreshView;
 
@@ -119,6 +120,7 @@ static CGFloat const kPregoressWeight = 1.2;
     return YES;
 }
 
+
 #pragma mark - UITableViewDelegate <UIScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -139,12 +141,24 @@ static CGFloat const kPregoressWeight = 1.2;
 
         scrollView.bounces = NO;
     }
+    
+    if([self.tableViewProxyDelegate respondsToSelector:@selector(scrollViewDidScroll:)]){
+        [self.tableViewProxyDelegate scrollViewDidScroll:scrollView];
+    }
+    
+    if([self.collectionViewProxyDelegate respondsToSelector:@selector(scrollViewDidScroll:)]){
+        [self.collectionViewProxyDelegate scrollViewDidScroll:scrollView];
+    }
 }
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
 {
     if ([self.tableViewProxyDelegate respondsToSelector:@selector(scrollViewDidScrollToTop:)]) {
         [self.tableViewProxyDelegate scrollViewDidScrollToTop:scrollView];
+    }
+    
+    if ([self.collectionViewProxyDelegate respondsToSelector:@selector(scrollViewDidScrollToTop:)]) {
+        [self.collectionViewProxyDelegate scrollViewDidScrollToTop:scrollView];
     }
 
     self.isScrollTopPosition = YES;
@@ -154,6 +168,10 @@ static CGFloat const kPregoressWeight = 1.2;
 {
     if ([self.tableViewProxyDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
         [self.tableViewProxyDelegate scrollViewWillBeginDragging:scrollView];
+    }
+    
+    if ([self.collectionViewProxyDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
+        [self.collectionViewProxyDelegate scrollViewWillBeginDragging:scrollView];
     }
 
     self.isScrollDragging = YES;
@@ -165,6 +183,10 @@ static CGFloat const kPregoressWeight = 1.2;
     if ([self.tableViewProxyDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
         [self.tableViewProxyDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     }
+    
+    if ([self.collectionViewProxyDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
+        [self.collectionViewProxyDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }
 
     if ([self.refreshView isProgressFull]) {
         [self startRefresh];
@@ -174,6 +196,52 @@ static CGFloat const kPregoressWeight = 1.2;
     [self.refreshView setRefreshBarProgress:0];
 
 }
+#pragma mark - UICollectionView Delegate methods. 
+
+-(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:didSelectItemAtIndexPath:)]) {
+        [self.collectionViewProxyDelegate collectionView:collectionView didSelectItemAtIndexPath:indexPath];
+        
+    }
+}
+
+-(void) collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:didEndDisplayingCell:forItemAtIndexPath:)]) {
+        [self.collectionViewProxyDelegate collectionView:collectionView didEndDisplayingCell:cell forItemAtIndexPath:indexPath];
+    }
+    
+}
+
+-(void) collectionView:(UICollectionView *)collectionView didEndDisplayingSupplementaryView:(UICollectionReusableView *)view forElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:didEndDisplayingSupplementaryView:forElementOfKind:atIndexPath:)])
+    {
+        [self.collectionViewProxyDelegate collectionView:collectionView didEndDisplayingSupplementaryView:view forElementOfKind:elementKind atIndexPath:indexPath];
+    }
+    
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    if([self.delegate respondsToSelector:@selector(collectionView:didHighlightItemAtIndexPath:)])
+    {
+        [self.collectionViewProxyDelegate collectionView:collectionView didHighlightItemAtIndexPath:indexPath];
+    }
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    if([self.delegate respondsToSelector:@selector(collectionView:didUnhighlightItemAtIndexPath:)]){
+        [self.collectionViewProxyDelegate collectionView:collectionView didUnhighlightItemAtIndexPath:indexPath];
+    }
+}
+
+- (void) collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if([self.delegate respondsToSelector:@selector(collectionView:performAction:forItemAtIndexPath:withSender:)]){
+        [self.collectionViewProxyDelegate collectionView:collectionView performAction:action forItemAtIndexPath:indexPath withSender:sender];
+    }
+}
+
 
 #pragma mark - Method Forwarding
 - (BOOL)respondsToSelector:(SEL)aSelector
